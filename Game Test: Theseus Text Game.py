@@ -13,10 +13,13 @@ x_pressed = False
 menu_trig = False
 menu_secret = False
 have_clue_check = False
+show_pres_z = True
 
 #------Int Trackers------
 theseus_secret = 0
 click_tracker = 0
+flash_counter = 0
+line_index = 0
 
 #-----Fonts-------
 choice_font = pygame.font.SysFont("Arial", 30)
@@ -29,6 +32,14 @@ menu_main_label = "Menu: "
 menu_sub_label = "made ya look ;)"
 theseus_secret_label = "Hi! You Found Me!"
 
+#-----Main Title Menu-------
+main_title_main = pygame.image.load("Assets:Sprites/Main_Title_Main.png")
+main_title_main_fitted = pygame.transform.scale(main_title_main, [1020, 420])
+main_title_title = pygame.image.load("Assets:Sprites/Main_Title_Title_Real_1.png")
+main_title_title_fitted = pygame.transform.scale(main_title_title, [510, 210])
+main_title_title_2 = pygame.image.load("Assets:Sprites/Main_Title_Title_Real_2.png")
+main_title_title_fitted_2 = pygame.transform.scale(main_title_title_2, [510, 210])
+
 #------Sprites-------
 theseus_sprite = pygame.image.load("Assets:Sprites/Theseus PlaceHolder-1.png.png")
 theseus_sprite_big = pygame.transform.scale(theseus_sprite, (99, 99))
@@ -36,52 +47,58 @@ theseus_sprite_big = pygame.transform.scale(theseus_sprite, (99, 99))
 #----Static Backgrounds---
 ai_placeholder_image = pygame.image.load("Assets:Sprites/Gemini_Generated_Image_uo4kdvuo4kdvuo4k.png")
 ai_placeholder_image_fitted = pygame.transform.scale(ai_placeholder_image, (1020, 420))
-##TODO: label and stretch all background scenes with appropriate names
-back_intro_bard_scene = pygame.image.load("Assets:Sprites/Intro_Bard_Scene.png")
+back_intro_bard_scene = pygame.image.load("Assets:Sprites/Intro Bard Scene.png")
 back_intro_bard_scene_fitted = pygame.transform.scale(back_intro_bard_scene, (1020, 420))
-back_athens_assembly_1 = pygame.image.load("Assets:Sprites/Athens_Assembly_1.png")
+back_athens_assembly_1 = pygame.image.load("Assets:Sprites/Athens Assembly 1.png")
 back_athens_assembly_1_fitted = pygame.transform.scale(back_athens_assembly_1, (1020, 420))
-back_athens_assembly_2 = pygame.image.load("Assets:Sprites/Athens_Assembly_2.png")
+back_athens_assembly_2 = pygame.image.load("Assets:Sprites/Athens Assembly 2.png")
 back_athens_assembly_2_fitted = pygame.transform.scale(back_athens_assembly_2, (1020, 420))
-back_athens_docks = pygame.image.load("Assets:Sprites/Athens_Docks.png")
+back_athens_docks = pygame.image.load("Assets:Sprites/Athens Docks.png")
 back_athens_docks_fitted = pygame.transform.scale(back_athens_docks, (1020, 420))
-back_crete_docks_1 = pygame.image.load("Assets:Sprites/Crete_Docks_1.png")
+back_crete_docks_1 = pygame.image.load("Assets:Sprites/Crete Docks 1.png")
 back_crete_docks_fitted = pygame.transform.scale(back_crete_docks_1, (1020, 420))
-back_crete_docks_2 = pygame.image.load("Assets:Sprites/Crete_Docks_2.png")
+back_crete_docks_2 = pygame.image.load("Assets:Sprites/Crete Docks 2.png")
 back_crete_docks_2_fitted = pygame.transform.scale(back_crete_docks_2, (1020, 420))
 
-back_labyrinth_good_1 = pygame.image.load("Assets:Sprites/Labyrinth_Good_1.png")
+back_labyrinth_good_1 = pygame.image.load("Assets:Sprites/Labyrinth Good 1.png")
 back_labyrinth_good_1_fitted = pygame.transform.scale(back_labyrinth_good_1, (1020, 420))
-back_labyrinth_good_2 = pygame.image.load("Assets:Sprites/Labyrinth_Good_2.png")
+back_labyrinth_good_2 = pygame.image.load("Assets:Sprites/Labyrinth Good 2.png")
 back_labyrinth_good_2_fitted = pygame.transform.scale(back_labyrinth_good_2, (1020, 420))
-back_labyrinth_good_3 = pygame.image.load("Assets:Sprites/Labyrinth_Good_3.png")
+back_labyrinth_good_3 = pygame.image.load("Assets:Sprites/Labyrinth Good 3.png")
 back_labyrinth_good_3_fitted = pygame.transform.scale(back_labyrinth_good_3, (1020, 420))
-back_labyrinth_good_ariadne = pygame.image.load("Assets:Sprites/Labyrinth_Good_Ariadne.png")
+back_labyrinth_good_ariadne = pygame.image.load("Assets:Sprites/Labyrinth x Ariadne.png")
 back_labyrinth_good_ariadne_fitted = pygame.transform.scale(back_labyrinth_good_ariadne, (1020, 420))
-back_athens_blk_sail_1 = pygame.image.load("Assets:Sprites/Athens_Black_Sails_1.png")
+back_athens_blk_sail_1 = pygame.image.load("Assets:Sprites/Athens Black Sails 1.png")
 back_athens_blk_sail_1_fitted = pygame.transform.scale(back_athens_blk_sail_1, (1020, 420))
-back_athens_blk_sail_2 = pygame.image.load("Assets:Sprites/Athens_Black_Sails_2.png")
+back_athens_blk_sail_2 = pygame.image.load("Assets:Sprites/Athens Black Sails 2.png")
 back_athens_blk_sail_2_fitted = pygame.transform.scale(back_athens_blk_sail_2, (1020, 420))
-back_athens_blk_sail_3 = pygame.image.load( "Assets:Sprites/Athens_Black_Sails_3.png")
+back_athens_blk_sail_3 = pygame.image.load( "Assets:Sprites/Athens Black Sails 3.png")
 back_athens_blk_sail_3_fitted = pygame.transform.scale(back_athens_blk_sail_3, (1020, 420))
 
-back_labyrinth_bad_1 = pygame.image.load("Assets:Sprites/Labyrinth_Bad_1.png")
+back_labyrinth_bad_1 = pygame.image.load("Assets:Sprites/Labyrinth Bad 1.png")
 back_labyrinth_bad_1_fitted = pygame.transform.scale(back_labyrinth_bad_1, (1020, 420))
-back_labyrinth_bad_2 = pygame.image.load("Assets:Sprites/Labyrinth_Bad_2.png")
+back_labyrinth_bad_2 = pygame.image.load("Assets:Sprites/Labyrinth Bad 2.png")
 back_labyrinth_bad_2_fitted = pygame.transform.scale(back_labyrinth_bad_2, (1020, 420))
-back_labyrinth_bad_3 = pygame.image.load("Assets:Sprites/Labyrinth_Bad_3.png")
+back_labyrinth_bad_3 = pygame.image.load("Assets:Sprites/Labyrinth Bad 3.png")
 back_labyrinth_bad_3_fitted = pygame.transform.scale(back_labyrinth_bad_3, (1020, 420))
-back_labyrinth_bad_minotaur = pygame.image.load("Assets:Sprites/Labyrinth_Bad_Minotaur.png")
+back_labyrinth_bad_minotaur = pygame.image.load("Assets:Sprites/Labyrinth x Minotaur.png")
 back_labyrinth_bad_minotaur_fitted = pygame.transform.scale(back_labyrinth_bad_minotaur, (1020, 420))
-back_death_screen = pygame.image.load("Assets:Sprites/Death_Screen.png")
+back_death_screen = pygame.image.load("Assets:Sprites/Death Screen.png")
 back_death_screen_fitted = pygame.transform.scale(back_death_screen, (1020, 420))
 
 
 #----Text Box Frames----
-##TODO: Generate some retro ancient greek text boxes as jpgs 1 generic, 1 per main npc
-##TODO: label and stretch to fit all text needs. Leave ToDo here until all text tested
+text_box_blue_1 = pygame.image.load("Assets:Sprites/Text_Box_Blue_1.png")
+text_box_blue_1_fitted = pygame.transform.scale(text_box_blue_1, (220, 70))
+text_box_blue_2 = pygame.image.load("Assets:Sprites/Text_Box_Blue_2.png")
+text_box_blue_2_fitted = pygame.transform.scale(text_box_blue_2, (220, 70))
+text_box_purple = pygame.image.load("Assets:Sprites/Text_Box_Purple.png")
+text_box_purple_fitted = pygame.transform.scale(text_box_purple, (220, 70))
+text_box_empty = pygame.image.load("Assets:Sprites/Text_Box_Empty.png")
+text_box_empty_fitted = pygame.transform.scale(text_box_empty, (220, 70))
 
-#--------Scene Texts---------
+
+
 
 #--------Scenes-------------
 Intro_Bard_Scene = 0
@@ -106,10 +123,23 @@ Labyrinth_Bad_3 = 16
 Labyrinth_Bad_Minotaur = 17
 Death_Screen = 18
 #Menuing Scenes
-Menu_Scene = 19
-Game_Startup_Scene = 20
+Player_Menu = 19
+Main_Menu_Start = 20
 Credits_Scene = 21
 
+# --------Scene Texts---------
+scene_dialogues = {
+    Main_Menu_Start: ["Press Z...",
+                      "No, He Really Sucks",
+                      "Sigh... Dude... Press Z",
+                      "I'm telling you he really sucks"]
+    # Add more scenes here
+
+}
+
+
+#-------------------------------
+current_scene = Main_Menu_Start
 
 #---Main Program-----
 while running:
@@ -118,6 +148,23 @@ while running:
 
         #Main Screen
     pygame.draw.rect(screen, (25, 25, 25), (60, 60, 1080, 480))
+
+
+    #placing Startup scene here
+    if current_scene == Main_Menu_Start:
+        click_tracker = 0
+        #Title Screen Graphics
+        screen.blit(main_title_main_fitted, (90, 60))
+        screen.blit(main_title_title_fitted_2, (378, 63))
+        screen.blit(main_title_title_fitted, (375, 60))
+        #Text Box
+        #TODO: fix text box sprites backgrounds and test for resizing
+        screen.blit(text_box_purple_fitted, (370, 370))
+
+        #Scene Dialogue
+        line = scene_dialogues[Main_Menu_Start][click_tracker]
+        text_rend = choice_font.render(line, True, (25, 5, 0)) #change color when fixed
+        screen.blit(text_rend, (420, 390))
 
         #Main Buttons Screen
     pygame.draw.rect(screen, (76, 76, 76), (60, 480, 1080, 100))
@@ -150,6 +197,7 @@ while running:
 
             elif event.key == pygame.K_SPACE:
                 #Menu Trigger on/off
+                #TODO: refactor this after encoding a Player_Menu state
                 menu_secret = True
                 if menu_trig:
                     menu_trig = False
